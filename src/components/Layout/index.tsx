@@ -13,7 +13,7 @@ type LayoutProps = {
 const Layout = ({ nickname, avatarUrl, id, children }: LayoutProps) => {
   return (
     <div className="app__layout">
-      <header>
+      <header className="app__header">
         <Navbar nickname={nickname} avatarUrl={avatarUrl} id={id} />
       </header>
       <div className="">{children}</div>
