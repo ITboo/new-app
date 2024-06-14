@@ -1,0 +1,13 @@
+.badge__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.round {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: gray;
+}
