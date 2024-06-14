@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import Comment from '../Comment';
 import UserBadge from '../UserBadge';
 import './index.css';
 
@@ -10,6 +12,7 @@ type DetailedCardProps = {
   isLikedByYou: boolean;
   comments: [];
 };
+
 const DetailedCard = ({
   userName,
   avatarUrl,
@@ -19,13 +22,37 @@ const DetailedCard = ({
   isLikedByYou,
   comments,
 }: DetailedCardProps) => {
+  const [isCommentsShown, setIsCommentsShown] = useState(false);
+  const onClickShowMore = () => {
+    setIsCommentsShown(true);
+  };
+
+  const renderComments = () => {
+    if (comments.length > 2 && !isCommentsShown) {
+      const commentsCopy = [...comments];
+      const commentsForRender = commentsCopy.splice(comments.length - 2, 2);
+
+      return (
+        <>
+          <span
+            onClick={() => onClickShowMore()}
+          >{`Show ${comments.length - commentsForRender.length} more`}</span>
+          {commentsForRender.map((comment) => (
+            <Comment {...comment} />
+          ))}
+        </>
+      );
+    }
+    return comments.map((comment) => <Comment {...comment} />);
+  };
+
   return (
     <div className="detailed-card">
       <header className="detailed-card__header">
         <UserBadge nickname={userName} avatarUrl={avatarUrl} id={userId} />
       </header>
-      <div>
-        <img src={imgUrl} alt="img" className="detailed-card__img" />
+      <div className="detailed-card__img">
+        <img src={imgUrl} alt="img" />
       </div>
       <div className="buttons">
         {isLikedByYou ? (
@@ -152,10 +179,7 @@ const DetailedCard = ({
         </svg>
       </div>
       <div className="detailed-card__likes">{`Liked by ${likes} people`}</div>
-      <div className="detailed-card__comments">
-        {comments}
-        comment comment comment
-      </div>
+      <div className="detailed-card__comments">{renderComments()}</div>
       <textarea
         name=""
         id=""

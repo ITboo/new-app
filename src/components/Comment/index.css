@@ -1,0 +1,11 @@
+.comment__wrapper {
+  display: flex;
+  align-items: center;
+}
+.comment__nickname {
+  font-size: 18px;
+  font-weight: 800;
+  margin-right: 5px;
+}
+.comment__text {
+}
