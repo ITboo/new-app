@@ -1,7 +1,14 @@
+import { useEffect } from 'react';
 import DetailedCard from '../../components/DetailedCard';
 import Layout from '../../components/Layout';
+import { useDispatch } from 'react-redux';
+import { getPhotos } from '../../redux/actions/photos';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPhotos());
+  }, []);
   return (
     <Layout nickname={'Boo'} avatarUrl={''} id={'1'}>
       <div>
